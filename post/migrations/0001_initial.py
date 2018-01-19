@@ -33,15 +33,12 @@ class Migration(migrations.Migration):
                 ('content', models.TextField(verbose_name='Conteúdo')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Criado em')),
                 ('modified', models.DateTimeField(auto_now=True, verbose_name='Modificado em')),
+                ('topic', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='post.Topic', verbose_name='Tópico')),
+
             ],
             options={
                 'verbose_name': 'Tópico',
                 'verbose_name_plural': 'Tópicos',
             },
-        ),
-        migrations.AddField(
-            model_name='reply',
-            name='topic',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='post.Topic', verbose_name='Tópico'),
         ),
     ]

@@ -12,7 +12,7 @@ class Topic(models.Model):
     class Meta:
         verbose_name = 'Tópico'
         verbose_name_plural = 'Tópicos'
-        # ordering IMPORTANTE
+        ordering = ['-created']
 
     def __str__(self):
         return self.title

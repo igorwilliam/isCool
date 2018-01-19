@@ -17,3 +17,17 @@ class IndexViewTestCase(TestCase):
     def test_template_used(self):
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, 'index.html')
+
+# class NewTopicViewTestCase(TestCase):
+#
+#     def setup(self):
+#         self.client = Client()
+#         self.url = reverse('post')
+#
+#     def test_newTopic(self):
+#         data = {'title': '','content': ''}
+#         response = self.client.post(self.url,data)
+#         self.assertFormError(response, 'form', 'title', 'Este campo é obrigátorio')
+#         self.assertFormError(response, 'form', 'content', 'Este campo é obrigátorio')
+#
+#

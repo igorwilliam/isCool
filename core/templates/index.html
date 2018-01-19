@@ -25,9 +25,17 @@
         <div class="tab-content">
 
           <div class="tab-pane fade show active" id="postar_topico" role="tabpanel" >
+
+            {% if sucess %}
+              <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Tópico Criado</strong>
+              </div>
+            {% endif %}
+
             <form class="" action="{% url 'post:newTopic' %}" method="post">
               {% csrf_token %}
-              {% for field in form %}
+              {% for field in formTopic %}
                 {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
                   {% render_field field class='form-control' %}
                   {# {% for error in field. %} #}
@@ -71,6 +79,25 @@
                 <div class="row">
 
                   <div class="col">
+                    <form class="" action="{% url 'post:newReply' %}" method="post">
+
+
+                      {% csrf_token %}
+
+
+
+                      <div class="form-group">
+                        <label for="{{ form.nome.id_for_label}}">Conteudo</label>
+                        {{ formReply.content| add_class:"form-control"}}
+                      </div>
+
+                      <input name="topic" id='id_topic' value='{{ topic.id }}' hidden/>
+
+
+                      <button type="submit" class="btn btn-secondary">Comentar</button>
+                    </form>
+
+
 
                     <table class="table table-hover table-active">
                         <tbody>
@@ -118,7 +145,7 @@
           </div>
 
           <div class="card-footer ">
-            <a href="#" class="badge badge-danger">Danger</a>
+            <a href="#" class="badge badge-danger">Disciplina Tag</a>
 
 
             <small>palavras chave bababababababababababababbbbbb</small>
