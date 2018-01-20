@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+<div class="container margin-top">
+  <p class="display-4">Cadastro de Disciplina</p>
+
+  <form class="form-group" action="" method="post">
+
+    {% csrf_token %}
+      {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+      <div class="form-group">
+        <label for="">Nome da Disciplina</label>
+        {% render_field form.name class='form-control' placeholder='Matemática' %}
+        {% render_field form.teacher class='form-control' placeholder='Matemática' %}
+      </div>
+
+      <div class="form-group">
+        <label for="">Descrição da Disciplina</label>
+        {% render_field form.description class='form-control' rows="20" cols="20" placeholder='Desenvolver capacidades do aluno de observação e representação dos objetos geométricos e físicos. Fazer com que eles possam progredir na aquisição de vocabulário preciso em geometria. Fornecer ao aluno, uma bagagem de conhecimento que lhes permita resolver problemas colocados na vida corrente ou em outras disciplinas. Incitá-los ao rigor lógico nos pensamentos dedutivo e indutivo.' %}
+      </div>
+
+
+      {% endwith %}
+
+
+  <button type="submit" class="btn btn-success">Cadastrar Disciplina</button>
+  </form>
+</div>
+
+
+{% endblock %}

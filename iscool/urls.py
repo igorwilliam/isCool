@@ -20,13 +20,14 @@ from django.contrib.auth.views import login, logout
 from core import views
 from post import urls as post_urls
 from accounts import urls as accounts_urls
-
+from discipline import urls as discipline_urls
 
 urlpatterns = [
     path('',views.index, name='index'),
     path('admin/', admin.site.urls),
     path('postar/',include(post_urls)),
     path('conta/',include(accounts_urls)),
+    path('disciplina/',include(discipline_urls)),
     path('entrar/', login, {'template_name': 'accounts/login.html'}, name='login'),
     path('sair/', logout, {'next_page': 'login'}, name='logout'),
 

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'core',
     'post',
     'accounts',
+    'discipline',
 ]
 
 MIDDLEWARE = [

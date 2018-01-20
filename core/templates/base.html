@@ -11,7 +11,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %} ">
   <!-- Custom CSS -->
-  <!-- <link rel="stylesheet" href="base.css">  -->
+  <link rel="stylesheet" href="{% static 'css/extra.css' %}"> 
 
   <!--Custom CSS-->
 
@@ -34,16 +34,28 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Disciplinas</a>
+
+      <li class="nav-item">
+
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Disciplinas</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'discipline:addDiscipline' %}">Cadastrar Disciplina</a>
+              <a class="dropdown-item" href="{% url 'discipline:listDiscipline' %}">Busca Disciplina</a>
+
+
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Alunos</a>
-          </li>
-          <li class="nav-item disabled">
-            <a class="nav-link" href="#">Como funciona o isCool?</a>
-          </li>
-        </ul>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Alunos</a>
+        </li>
+        <li class="nav-item disabled">
+          <a class="nav-link" href="#">Como funciona o isCool?</a>
+        </li>
+      </ul>
         <div class="nav-item dropdown">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             olá, {{user}}

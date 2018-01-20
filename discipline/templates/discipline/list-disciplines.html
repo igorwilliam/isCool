@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+  <div class="container margin-top">
+
+    <p class="display-4">Disciplinas Disponíveis</p>
+
+    {% for discipline in disciplines %}
+      <div class="card bg-light ">
+        <div class="card-header bg-transparent border-info">Mantido por fulano</div>
+
+
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{discipline.name}}</strong></h5>
+          <p class="card-text">{{discipline.description}}</p>
+        </div>
+        <div class="card-footer bg-transparent border-info">
+          <button type="button" class="btn btn-info" name="button">Vincular-se a Disciplina</button>
+        </div>
+      </div>
+      <br><br>
+    {% endfor %}
+
+    </div>
+
+{% endblock %}
