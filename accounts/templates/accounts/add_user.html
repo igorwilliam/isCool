@@ -1,0 +1,72 @@
+{% extends "base_accounts.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Cadastro de Usuário{% endblock %}
+
+{% block container %}
+
+<div class="box">
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <p class="display-4">Cadastre-se</p>
+
+  {% for error in form.non_field_errors %}
+    <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{error}}
+    </div>
+  {% endfor %}
+  {% for error in form.errors %}
+    {{error}}
+  {% endfor %}
+
+  <ul class="nav nav-pills nav-justified" role="tablist" id="tab-choice">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#add_student" role="tab">Sou Aluno</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#add_teacher" role="tab" >Sou Professor</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+
+    <div class="tab-pane fade show active" id="add_student" role="tabpanel" >
+
+      <form class="form-box" action="" method="post">
+        {% csrf_token %}
+
+
+        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+          {% render_field form.username class='form-control' placeholder='Nome de Usuário' %}
+          {% render_field form.email class='form-control' placeholder='E-mail' %}
+          {% render_field form.password1 class='form-control' placeholder='Senha' %}
+          {% render_field form.password2 class='form-control' placeholder='Confirmação da Senha' %}
+
+        {% endwith %}
+
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="{% url 'login' %}" class="btn btn-secondary">Já Tenho Cadastro</a>
+        <hr>
+        <button class="btn btn-warning btn-block">Como funciona o isCool?</button>
+
+      </form>
+
+    </div>
+
+
+    <div class="tab-pane fade" id="add_teacher" role="tabpanel" >
+
+      123
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

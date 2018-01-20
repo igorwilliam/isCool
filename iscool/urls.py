@@ -15,13 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import login, logout
 
 from core import views
 from post import urls as post_urls
+from accounts import urls as accounts_urls
 
 
 urlpatterns = [
     path('',views.index, name='index'),
     path('admin/', admin.site.urls),
     path('postar/',include(post_urls)),
+    path('conta/',include(accounts_urls)),
+    path('entrar/', login, {'template_name': 'accounts/login.html'}, name='login'),
+    path('sair/', logout, {'next_page': 'login'}, name='logout'),
+
 ]

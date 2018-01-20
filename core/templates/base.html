@@ -1,7 +1,7 @@
 <!doctype html>
 {% load static %}
 
-<html lang="en">
+<html lang="pt">
 
 <head>
   <!-- Required meta tags -->
@@ -11,7 +11,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %} ">
   <!-- Custom CSS -->
-  {# <link rel="stylesheet" href="base.css"> #}
+  <!-- <link rel="stylesheet" href="base.css">  -->
 
   <!--Custom CSS-->
 
@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Página Inicial <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Disciplinas</a>
@@ -41,13 +41,21 @@
             <a class="nav-link" href="#">Alunos</a>
           </li>
           <li class="nav-item disabled">
-            <a class="nav-link" href="#">Sobre</a>
+            <a class="nav-link" href="#">Como funciona o isCool?</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="nav-item dropdown">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            olá, {{user}}
+         </button>
+          <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 44px, 0px); top: 0px; left: 0px; will-change: transform;">
+            <a class="dropdown-item" href="{% url 'accounts:myAccount' %}">Minha Conta</a>
+            <a class="dropdown-item" href="#">Mudar Informações</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
