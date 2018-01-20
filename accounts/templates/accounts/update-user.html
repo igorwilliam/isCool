@@ -1,0 +1,22 @@
+{% extends "accounts/minha-conta.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Alterar Dados{% endblock %}
+
+{% block accounts_container %}
+  <form class="" method="post">
+    <h2>Alterar Dados</h2>
+    {% csrf_token %}
+
+    {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+          {% render_field form.name class='form-control' placeholder='Nome de Usuário' %}
+
+          {% render_field form.email class='form-control' placeholder='Senha' %}
+
+    {% endwith %}
+
+
+    <button class="btn btn-primary" type="submit">Alterar</button>
+  </form>
+{% endblock %}

@@ -4,6 +4,20 @@
 {% block title %}Minha Conta{% endblock %}
 
 {% block container %}
-
+<br><br><br><br><br><br>
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">Minha Conta</a>
+            <a href="{% url 'accounts:updateUser' %}" class="list-group-item">Alterar Dados</a>
+            <a href="{% url 'accounts:updatePassword' %}" class="list-group-item">Alterar Senha</a>
+          </div>
+      </div>
+      <div class="col-md-8">
+        {% block accounts_container %}{% endblock %}
+      </div>
+  </div>
+</div>
 
 {% endblock %}
