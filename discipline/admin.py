@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Discipline, RegisterStudent
+
+class RegisterStudentAdmin(admin.ModelAdmin):
+    list_filter = ['discipline']
+
+admin.site.register(RegisterStudent, RegisterStudentAdmin)
+admin.site.register(Discipline)

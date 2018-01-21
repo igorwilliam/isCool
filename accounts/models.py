@@ -33,6 +33,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
+        # permissions = (
+        #     ('teacher', 'professor'),
+        #     ('moderator', 'moderador'),
+        #     ('student', 'aluno'),
+        # )
 
     def __str__(self):
         return self.name or self.username

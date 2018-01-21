@@ -8,6 +8,8 @@ class Topic(models.Model):
     content = models.TextField('Conteúdo')
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
+    discipline = models.ForeignKey('discipline.Discipline', verbose_name='Disciplina', on_delete=models.DO_NOTHING)
+
 
     class Meta:
         verbose_name = 'Tópico'

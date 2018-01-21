@@ -7,17 +7,44 @@
 
     <p class="display-4">Disciplinas Disponíveis</p>
 
+    <form class="form-inline">
+      <input class="form-control" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <br><br><br>
+
     {% for discipline in disciplines %}
-      <div class="card bg-light ">
-        <div class="card-header bg-transparent border-info">Mantido por fulano</div>
 
 
+        <div class="card bg-light">
+          {% for register in registers %}
+          {% if register.discipline.id == discipline.id and register.status == 0 %}<span class="badge badge-pill badge-warning">Solicitação Pendente</span>{% endif %}
+          {% if register.discipline.id == discipline.id and register.status == 1 %}<span class="badge badge-pill badge-success">Cadastrado</span>{% endif %}
+          {% if register.discipline.id == discipline.id and register.status == 2 %}<span class="badge badge-pill badge-danger">Banido</span>{% endif %}
+          {% endfor %}
+
+          <div class="card-header bg-transparent border-info">Mantido por {{discipline.teacher}}</div>
         <div class="card-body">
           <h5 class="card-title"><strong>{{discipline.name}}</strong></h5>
           <p class="card-text">{{discipline.description}}</p>
         </div>
         <div class="card-footer bg-transparent border-info">
-          <button type="button" class="btn btn-info" name="button">Vincular-se a Disciplina</button>
+          <form class="" action="" method="post">
+            {% csrf_token %}
+            {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+
+            <input name="student" id='id_student' value='{{ request.user.id }}' hidden/>
+            <input name="discipline" id='id_discipline' value='{{ discipline.id }}' hidden/>
+            <input name="status" id='id_status' value='0' hidden/>
+
+
+            {% endwith %}
+
+            <button type="submit" class="btn btn-info" name="button">Inscrever-se</button>
+
+          </form>
         </div>
       </div>
       <br><br>

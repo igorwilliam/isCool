@@ -33,14 +33,22 @@
 
             <form class="" action="{% url 'post:newTopic' %}" method="post">
               {% csrf_token %}
-              {% for field in formTopic %}
-                {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
-                  {% render_field field class='form-control' %}
-                  {# {% for error in field. %} #}
 
-                  {# {% endfor %} #}
-                {% endwith %}
-              {% endfor %}
+              {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+              <div class="form-group">
+                {% render_field formTopic.title class='form-control' placeholder='Titulo do tópico' %}
+              </div>
+
+              <div class="form-group">
+                {% render_field formTopic.discipline class='custom-select' value="selected" %}
+              </div>
+
+              <div class="form-group">
+                {% render_field formTopic.content class='form-control' rows="5" cols="20" placeholder='Conteudo do seu Tópico' %}
+              </div>
+
+              {% endwith %}
               <button type="submit" class="btn btn-primary">Postar</button>
             </form>
 
@@ -73,7 +81,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col">
-                <p class="lead">{{ topic.content}}</p>
+                <p class="lead">{{ topic.content|escape }}</p>
                 <div class="row">
 
                   <div class="col">
@@ -143,7 +151,7 @@
           </div>
 
           <div class="card-footer ">
-            <a href="#" class="badge badge-danger">Disciplina Tag</a>
+            <h5><a href="#" class="badge badge-info">{{ topic.discipline }}</a></h5>
 
 
             <small>palavras chave bababababababababababababbbbbb</small>

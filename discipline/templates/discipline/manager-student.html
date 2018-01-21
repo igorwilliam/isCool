@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+  <div class="container margin-top">
+
+    <p class="display-4">Gerenciar Alunos</p>
+
+    <table class="table table-hover">
+
+        {% if registers %}
+          <thead>
+            <tr>
+              <th scope="col">Nome do Aluno</th>
+              <th scope="col">Situação</th>
+              <th scope="col">Mudar Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+        {% endif %}
+
+        {% for register in registers %}
+          <tr>
+            <td scope="row"> {{register.student}} </td>
+            <td>
+
+              {% if register.status == 0 %}Solicitação Pendente em{% endif %}
+              {% if register.status == 1 %}Inscrito em{% endif %}
+              {% if register.status == 2 %}Banido em{% endif %}
+
+
+               {{register.discipline}}
+
+            </td>
+            <td>
+              <form class="" action="{% url 'discipline:registerStudent' register.id %}" method="post">
+                {% csrf_token %}
+                {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+                <input name="student" id='id_student' value='{{ register.student.id }}' hidden/>
+                <input name="discipline" id='id_discipline' value='{{ register.discipline.id }}' hidden/>
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-success">
+                    <input type="radio" name="status" id="id_status" autocomplete="off" value='1'> Aceitar
+                  </label>
+                  <label class="btn btn-danger">
+                    <input type="radio" name="status" id="id_status" autocomplete="off" value='2'> Recusar
+                  </label>
+                </div>
+                <input type="submit" name="" value="">
+
+                {% endwith %}
+              </form>
+            </td>
+          </tr>
+        {% empty %}
+        <div class="alert alert-warning" role="alert">
+          Nenhum Aluno Cadastrado
+        </div>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    </div>
+
+{% endblock %}
