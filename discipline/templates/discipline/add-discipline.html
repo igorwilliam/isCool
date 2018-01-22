@@ -4,10 +4,16 @@
 {% block container %}
 
 <div class="container margin-top">
-  <p class="display-4">Cadastro de Disciplina</p>
+  <p class="display-4">
+    {% if edit %}
+        Editar Disciplina
+      {% else %}
+        Cadastro de Disciplina
+    {% endif %}
+  </p>
+
 
   <form class="form-group" action="" method="post">
-
     {% csrf_token %}
       {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
 
@@ -28,7 +34,13 @@
       {% endwith %}
 
 
-  <button type="submit" class="btn btn-success">Cadastrar Disciplina</button>
+  <button type="submit" class="btn btn-success">
+    {% if edit %}
+        Editar Disciplina
+      {% else %}
+        Cadastrar Disciplina
+    {% endif %}
+  </button>
   </form>
 </div>
 

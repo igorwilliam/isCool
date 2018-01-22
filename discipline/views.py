@@ -46,7 +46,18 @@ class ListDisciplineView(object):
 
 listDiscipline = ListDisciplineView()
 
+class ManagerDisciplineView(object):
 
+    def __call__(self, request):
+
+        context = {
+            'disciplines': Discipline.objects.all(),
+            # 'disciplines': Discipline.objects.get_queryset().filter(id=request.user.id),
+        }
+
+        return render(request, 'discipline/manager-discipline.html', context)
+
+managerDiscipline = ManagerDisciplineView()
 
 
 class ListStudentView(object):
@@ -77,3 +88,29 @@ class RegisterStudentView(object):
 
 
 registerStudent = RegisterStudentView()
+
+class EditDisciplineView(object):
+
+    def __call__(self, request, id):
+
+        discipline = get_object_or_404(Discipline, id=id)
+        if request.method == 'POST':
+            form = DisciplineForm(data=request.POST, instance=discipline)
+            if form.is_valid():
+                form.save()
+                return redirect('discipline:managerDiscipline')
+        else:
+            form = DisciplineForm(instance=discipline)
+
+        context = {
+            'form': form,
+            'edit': 'edit',
+        }
+
+        return render(request,'discipline/add-discipline.html', context)
+
+editDiscipline = EditDisciplineView()
+
+def deleteDiscipline(request, id):
+    discipline = Discipline.objects.get(id=id).delete() 
+    return redirect('discipline:managerDiscipline')

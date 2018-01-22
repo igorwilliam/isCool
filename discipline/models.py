@@ -26,8 +26,11 @@ class RegisterStudent(models.Model):
         verbose_name = 'Registro'
         verbose_name_plural = 'Registros'
         unique_together = (('student', 'discipline'),)
+        ordering = ['-join']
+
 
 
     student = models.ForeignKey('accounts.User', verbose_name='Aluno', on_delete=models.DO_NOTHING)
     discipline = models.ForeignKey('Discipline', verbose_name='Disciplina', on_delete=models.DO_NOTHING)
     status = models.IntegerField('Situação', choices=STATUS_CHOICE, default=0)
+    join = models.DateTimeField('Registrado', auto_now_add=True)
