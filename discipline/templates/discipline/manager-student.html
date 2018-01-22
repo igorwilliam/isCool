@@ -15,21 +15,22 @@
               <th scope="col">Nome do Aluno</th>
               <th scope="col">Situação</th>
               <th scope="col" style="text-align: center">Ações</th>
-              <th scope="col">Mudar Estado</th>
+              <th scope="col" style="text-align: center">Mudar Estado</th>
             </tr>
           </thead>
           <tbody>
         {% endif %}
 
         {% for register in registers %}
-          <tr class="table-{% if register.status == 0 %}warning{% elif register.status == 1 %}success{% else %}danger{% endif %}">
-            <td scope="row"> {{register.student}} </td>
+            <tr>
+              <td scope="row" > {{register.student}} </td>
             <td>
 
-              {% if register.status == 0 %}Solicitação Pendente em{% endif %}
-              {% if register.status == 1 %}Inscrito em{% endif %}
-              {% if register.status == 2 %}Banido em{% endif %}
-                {{register.discipline}}
+              {% if register.status == 0 %}  <p class="text-warning"><strong>Solicitação Pendente em{% endif %}
+              {% if register.status == 1 %}  <p class="text-success"><strong>Inscrito em{% endif %}
+              {% if register.status == 2 %}  <p class="text-danger"><strong>Banido em{% endif %}
+                {{register.discipline}}</strong></p>
+
             </td>
             <td style="text-align: center">
               <form class="" action="{% url 'discipline:registerStudent' register.id %}" method="post">
@@ -40,15 +41,18 @@
                 <input name="discipline" id='id_discipline' value='{{ register.discipline.id }}' hidden/>
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary{% if register.status == 1 %} active{% endif %}">
+                  <label class="btn btn-primary{% if register.status == 1 %} active{% endif %}">
                     <input type="radio" name="status" id="id_status" autocomplete="off" value='1'>  Aceitar
                   </label>
-                  <label class="btn btn-secondary{% if register.status == 2 %} active{% endif %}">
+                  <label class="btn btn-primary{% if register.status == 2 %} active{% endif %}">
                     <input type="radio" name="status" id="id_status" autocomplete="off" value='2'>  Recusar
                   </label>
                 </div>
-                <td>
-                   <input type="submit" name="" value="Mudar Estado" class="btn btn-secondary btn-lg">
+
+                <button type="button" class="btn btn-primary">moderador</button>
+
+                <td style="text-align: center">
+                   <input type="submit" name="" value="Mudar Estado" class="btn btn-primary btn-lg">
                 </td>
                 {% endwith %}
               </form>

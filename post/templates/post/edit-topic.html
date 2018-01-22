@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+<div class="container margin-top">
+
+  <p class="display-4">Editar Tópico</p>
+
+
+  <form class="form-group" action="" method="post">
+    {% csrf_token %}
+      {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+      <div class="form-group">
+        <label for="">Titulo do Tópico</label>
+        {% render_field form.title class='form-control' %}
+      </div>
+
+      <input name="discipline" id='id_discipline' value='{{ form.discipline.value }}' hidden/>
+
+
+      <div class="form-group">
+        <label for="">Conteudo</label>
+        {% render_field form.content class='form-control' rows="20" %}
+      </div>
+
+
+      {% endwith %}
+
+
+      <button type="submit" class="btn btn-success">Editar Tópico</button>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'index'  %}" role="button">Cancelar Edição</a>
+  </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+<div class="container margin-top">
+
+  <p class="display-4">Editar Comentário</p>
+
+
+  <form class="form-group" action="" method="post">
+    {% csrf_token %}
+      {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+      <input name="topic" id='id_topic' value='{{ form.topic.value }}' hidden/>
+
+
+      <div class="form-group">
+        <label for="">Conteudo</label>
+        {% render_field form.content class='form-control' rows="20" %}
+      </div>
+
+
+      {% endwith %}
+
+
+      <button type="submit" class="btn btn-success">Editar Comentário</button>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'index'  %}" role="button">Cancelar Edição</a>
+  </form>
+</div>
+
+
+{% endblock %}

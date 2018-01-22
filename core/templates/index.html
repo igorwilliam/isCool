@@ -24,13 +24,6 @@
 
           <div class="tab-pane fade show active" id="postar_topico" role="tabpanel" >
 
-            {% if sucess %}
-              <div class="alert alert-dismissible alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Tópico Criado</strong>
-              </div>
-            {% endif %}
-
             <form class="" action="{% url 'post:newTopic' %}" method="post">
               {% csrf_token %}
 
@@ -50,6 +43,7 @@
 
               {% endwith %}
               <button type="submit" class="btn btn-primary">Postar</button>
+
             </form>
 
           </div>
@@ -101,6 +95,7 @@
 
 
                       <button type="submit" class="btn btn-secondary">Comentar</button>
+
                     </form>
 
 
@@ -110,7 +105,13 @@
 
                           {% for reply in replies %}
                             {% if reply.topic.id == topic.id %}
-                              <tr><td>{{reply.content}}</td></tr>
+                              <tr>
+                                <td>
+                                  {{reply.content}}<a class="btn btn-outline-secondary btn-sm" href="{% url 'post:editReply' reply.id %}" role="button">Editar</a>
+                                  {{reply.content}}<a class="btn btn-outline-danger btn-sm" href="{% url 'post:deleteReply' reply.id %}" role="button">Deletar</a>
+                                </td>
+                              </tr>
+
                             {% endif %}
                           {% endfor %}
 
@@ -145,6 +146,8 @@
             <div class="card-text"><p class="lead"> {{ topic.content|linebreaks }} </p></div>
             <div class="row">
               <button type="button" class="btn btn-outline-primary display-2" data-toggle="modal" data-target="#modal{{topic.id}}">Ler Comentários</button>
+              <a class="btn btn-secondary btn-sm" href="{% url 'post:editTopic' topic.id %}" role="button">Editar</a>
+              <a class="btn btn-secondary btn-sm" href="{% url 'post:deleteTopic' topic.id %}" role="button">Deletar</a>
               <p class="card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
 
