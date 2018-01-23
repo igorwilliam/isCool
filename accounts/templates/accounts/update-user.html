@@ -4,7 +4,7 @@
 {% block title %}Alterar Dados{% endblock %}
 
 {% block accounts_container %}
-  <form class="" method="post">
+  <form class="" method="post" enctype="multipart/form-data">
     <h2>Alterar Dados</h2>
     {% csrf_token %}
 
@@ -13,6 +13,9 @@
           {% render_field form.name class='form-control' placeholder='Nome de Usuário' %}
 
           {% render_field form.email class='form-control' placeholder='Senha' %}
+
+          {% render_field form.avatar %}
+
 
     {% endwith %}
 

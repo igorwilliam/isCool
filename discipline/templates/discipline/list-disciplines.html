@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load thumbnail %}
 
 {% block container %}
 
@@ -26,7 +27,10 @@
 
           {% endfor %}
 
-          <div class="card-header bg-transparent border-info">Mantido por {{discipline.teacher}}</div>
+          <div class="card-header bg-transparent border-info">
+            <img src="{{discipline.teacher.avatar|thumbnail_url:'avatar'}}" alt="" class="rounded-circle">
+             <strong>Mantido por {{discipline.teacher}}</strong>
+           </div>
         <div class="card-body">
           <h5 class="card-title"><strong>{{discipline.name}}</strong></h5>
           <p class="card-text">{{discipline.description}}</p>

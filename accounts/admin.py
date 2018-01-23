@@ -24,7 +24,7 @@ class UserAdmin(BaseUserAdmin):
         (
             'Permissões', {
                 'fields': (
-                    'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', 'is_student', 'is_moderator', 'is_teacher'
+                    'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', 'is_student', 'is_moderator', 'is_teacher','avatar'
                 )
             }
         ),

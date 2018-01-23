@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path, include
 from django.contrib.auth.views import login, logout
+from django.conf.urls.static import static
 
 from core import views
 from post import urls as post_urls
@@ -34,3 +36,7 @@ urlpatterns = [
     path('sair/', logout, {'next_page': 'login'}, name='logout'),
 
 ]
+
+urlpatterns += static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)

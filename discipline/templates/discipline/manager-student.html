@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load thumbnail %}
 
 {% block container %}
 
@@ -12,7 +13,7 @@
         {% if registers %}
           <thead>
             <tr>
-              <th scope="col">Nome do Aluno</th>
+              <th scope="col">Aluno</th>
               <th scope="col">Situação</th>
               <th scope="col" style="text-align: center">Ações</th>
               <th scope="col" style="text-align: center">Mudar Estado</th>
@@ -24,9 +25,13 @@
 
         {% for register in registers %}
         {% if register.discipline.teacher == user %}
-
           <tr>
-            <td scope="row" > {{register.student}} </td>
+            <td>
+               <img src="{{register.student.avatar|thumbnail_url:'avatar'}}" alt="" class="rounded-circle">
+            </td>
+            <td >
+              {{register.student}}
+            </td>
             <td>
 
               {% if register.status == 0 %}  <p class="text-warning"><strong>Solicitação Pendente em{% endif %}

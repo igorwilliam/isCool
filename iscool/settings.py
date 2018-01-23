@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #libs
     'widget_tweaks',
+    'easy_thumbnails',
 
     #apps
     'core',
@@ -126,7 +127,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 #auth
 LOGIN_URL = 'login'
@@ -142,4 +147,11 @@ MESSAGE_TAGS = {
     messages_constants.SUCCESS: 'success',
     messages_constants.WARNING: 'warning',
     messages_constants.ERROR: 'danger',
+}
+
+#easy_thumbnails
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
 }

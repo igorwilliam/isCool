@@ -29,6 +29,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_moderator = models.BooleanField('Moderador', default=False)
     is_teacher = models.BooleanField('Professor', default=False)
 
+    avatar = models.ImageField('Avatar', upload_to='avatars', blank='true', default='avatars/user.png')
+
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

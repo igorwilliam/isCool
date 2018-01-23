@@ -23,7 +23,7 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
 
     model = User
     template_name = 'accounts/update-user.html'
-    fields = ['name', 'email']
+    fields = ['name', 'email', 'avatar']
     success_url = reverse_lazy('accounts:myAccount')
 
 

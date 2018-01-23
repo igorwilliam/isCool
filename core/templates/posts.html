@@ -1,4 +1,6 @@
 {% load widget_tweaks %}
+{% load thumbnail %}
+
 
 <div class="modal fade" id="modal{{topic.id}}" tabindex="-1" role="dialog" aria-labelledby="modal{{topic.id}}Label" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -45,6 +47,7 @@
                       {% if reply.topic.id == topic.id %}
                       <tr>
                         <td>
+                          <img src="{{reply.author.avatar|thumbnail_url:'avatar'}}" alt="" class="rounded-circle">
                           <strong>{{reply.author.get_short_name}} respondeu</strong>
                           <p class="lead">{{reply.content}}</p>
                           {% if user == register.student and register.status == 3  and register.discipline == topic.discipline or user == reply.author or topic.discipline.teacher == user %}
@@ -83,6 +86,7 @@
 
   <div class="{% if topic.is_warning == True %}card border-warning mb-3{% else %}card{% endif %}">
     <div class="card-header font-weight-bold">
+      <img src="{{topic.author.avatar|thumbnail_url:'avatar'}}" alt="" class="rounded-circle">
       Postado por {{topic.author.get_short_name}}
     </div>
 
