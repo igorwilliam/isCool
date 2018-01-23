@@ -8,9 +8,9 @@ class Topic(models.Model):
     content = models.TextField('Conteúdo')
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
-    discipline = models.ForeignKey('discipline.Discipline', verbose_name='Disciplina', on_delete=models.DO_NOTHING)
+    discipline = models.ForeignKey('discipline.Discipline', verbose_name='Disciplina', on_delete=models.PROTECT)
     is_warning = models.BooleanField('Aviso', default=False)
-    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.PROTECT)
 
 
     class Meta:
@@ -24,10 +24,10 @@ class Topic(models.Model):
 class Reply(models.Model):
 
     content = models.TextField('Comentário')
-    topic = models.ForeignKey('post.Topic', verbose_name='Tópico', on_delete=models.DO_NOTHING)
+    topic = models.ForeignKey('post.Topic', verbose_name='Tópico', on_delete=models.PROTECT)
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
-    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.PROTECT)
 
 
     class Meta:

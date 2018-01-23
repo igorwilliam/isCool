@@ -24,8 +24,8 @@
             <tr>
               <th scope="row">{{discipline.name}}</th>
               <td>{{discipline.description}}</td>
-              <td><a class="btn btn-secondary btn-sm" href="{% url 'discipline:editDiscipline' discipline.id %}" role="button">Editar</a></td>
-              <td><a class="btn btn-danger btn-sm" href="{% url 'discipline:deleteDiscipline' discipline.id %}" role="button">Excluir</a></td>
+              <td style="text-align: center"><a class="btn btn-secondary btn-sm" href="{% url 'discipline:editDiscipline' discipline.id %}" role="button">Editar</a></td>
+
             </tr>
           {% endif %}
 

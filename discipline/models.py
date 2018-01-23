@@ -4,7 +4,7 @@ from django.db import models
 
 class Discipline(models.Model):
 
-    teacher = models.ForeignKey('accounts.User', verbose_name='Professor(a)', on_delete=models.DO_NOTHING)
+    teacher = models.ForeignKey('accounts.User', verbose_name='Professor(a)', on_delete=models.CASCADE)
     name = models.CharField('Nome', max_length=25)
     description = models.TextField('Descição')
 

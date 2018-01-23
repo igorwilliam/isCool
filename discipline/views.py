@@ -1,9 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from discipline.models import Discipline, RegisterStudent
 from discipline.forms import DisciplineForm, RegisterStudentForm
 
+from post.models import Topic, Reply
+
 # Create your views here.
+@login_required
 def addDiscipline(request):
 
     if request.user.is_teacher == False:
@@ -23,13 +28,11 @@ def addDiscipline(request):
 
     return render(request, 'discipline/add-discipline.html', {'form': form})
 
-class ListDisciplineView(object):
+class ListDisciplineView(LoginRequiredMixin, object):
 
     def __call__(self, request):
 
 
-        if request.user.is_student == False:
-            return redirect('error')
 
         if request.method == 'POST':
             form = RegisterStudentForm(request.POST)
@@ -52,7 +55,7 @@ class ListDisciplineView(object):
 
 listDiscipline = ListDisciplineView()
 
-class ManagerDisciplineView(object):
+class ManagerDisciplineView(LoginRequiredMixin, object):
 
     def __call__(self, request):
 
@@ -70,7 +73,7 @@ class ManagerDisciplineView(object):
 managerDiscipline = ManagerDisciplineView()
 
 
-class ListStudentView(object):
+class ListStudentView(LoginRequiredMixin, object):
 
     def __call__(self, request):
 
@@ -88,7 +91,7 @@ listStudent = ListStudentView()
 
 
 
-class RegisterStudentView(object):
+class RegisterStudentView(LoginRequiredMixin, object):
 
     def __call__(self, request, id):
 
@@ -105,7 +108,7 @@ class RegisterStudentView(object):
 
 registerStudent = RegisterStudentView()
 
-class EditDisciplineView(object):
+class EditDisciplineView(LoginRequiredMixin, object):
 
     def __call__(self, request, id):
 
@@ -131,10 +134,14 @@ class EditDisciplineView(object):
 
 editDiscipline = EditDisciplineView()
 
-def deleteDiscipline(request, id):
+def deleteDiscipline(LoginRequiredMixin, request, id):
 
     if request.user.is_teacher == False:
         return redirect('error')
 
+    topics = Topic.objects.get_queryset().filter(id=id).delete()
+    reply = Reply.objects.get_queryset().filter(id=id).delete()
     discipline = Discipline.objects.get(id=id).delete()
+
+
     return redirect('discipline:managerDiscipline')

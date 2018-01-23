@@ -1,0 +1,15 @@
+dj-database-url==0.4.2
+Django==2.0.1
+django-widget-tweaks==1.4.1
+easy-thumbnails==2.5
+gunicorn==19.7.1
+model-mommy==1.5.0
+Pillow==5.0.0
+psycopg2==2.7.3.2
+pystache==0.5.4
+python-decouple==3.1
+pytz==2017.3
+six==1.11.0
+static==1.1.1
+Unipath==1.1
+whitenoise==3.3.1

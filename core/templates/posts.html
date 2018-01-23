@@ -103,7 +103,6 @@
         {% if topic.author == request.user or user == register.student and register.status == 3  and register.discipline == topic.discipline or topic.discipline.teacher == user %}
         <a class="btn btn-secondary btn-sm" href="{% url 'post:editTopic' topic.id %}" role="button">Editar</a>
         <a class="btn btn-secondary btn-sm" href="{% url 'post:deleteTopic' topic.id %}" role="button">Deletar</a>
-        <p class="card-text text-right"><small class="text-muted">Last updated 3 mins ago</small></p>
         {% endif %}
       </div>
 
@@ -113,7 +112,6 @@
       <h5><a href="#" class="badge badge-info">{{ topic.discipline }}</a></h5>
 
 
-      <small>palavras chave bababababababababababababbbbbb</small>
 
 
 

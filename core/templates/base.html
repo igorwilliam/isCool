@@ -37,26 +37,40 @@
             <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
           </li>
 
+
       <li class="nav-item">
 
+        {% if user.is_teacher %}
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Disciplinas</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{% url 'discipline:addDiscipline' %}">Cadastrar Disciplina</a>
-              <a class="dropdown-item" href="{% url 'discipline:listDiscipline' %}">Buscar Disciplinas</a>
               <a class="dropdown-item" href="{% url 'discipline:managerDiscipline' %}">Gerenciar Disciplinas</a>
 
             </div>
           </li>
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'discipline:listDiscipline' %}">Buscar Disciplinas</a>
+        </li>
+
+        {% endif %}
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'discipline:listStudent' %}">Gerenciar Alunos</a>
+      <li class="nav-item">
+
+
         </li>
-        <li class="nav-item disabled">
-          <a class="nav-link" href="#">Como funciona o isCool?</a>
-        </li>
+        {% if user.is_teacher == True %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'discipline:listStudent' %}">Gerenciar Alunos</a>
+          </li>
+
+        {% endif %}
+
       </ul>
         <div class="nav-item dropdown">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,9 +78,7 @@
          </button>
           <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 44px, 0px); top: 0px; left: 0px; will-change: transform;">
             <a class="dropdown-item" href="{% url 'accounts:myAccount' %}">Minha Conta</a>
-            <a class="dropdown-item" href="#">Mudar Informações</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
+
             <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
           </div>
         </div>
