@@ -45,12 +45,12 @@
                       {% if reply.topic.id == topic.id %}
                       <tr>
                         <td>
-                          <strong>Comentado por:{{reply.author.get_short_name}}</strong>
+                          <strong>{{reply.author.get_short_name}} respondeu</strong>
                           <p class="lead">{{reply.content}}</p>
                           {% if user == register.student and register.status == 3  and register.discipline == topic.discipline or user == reply.author or topic.discipline.teacher == user %}
 
-                            <a class="btn btn-outline-secondary btn-sm" href="{% url 'post:editReply' reply.id %}" role="button">Editar</a>
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'post:deleteReply' reply.id %}" role="button">Deletar</a>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'post:editReply' reply.id %}" role="button">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'post:deleteReply' reply.id %}" role="button">Deletar</a>
 
                           {% endif %}
                         </td>
@@ -81,24 +81,20 @@
 
 <div class="container">
 
-  <div class="{% if topic.is_warning == True %}card text-white bg-warning{% else %}card{% endif %}">
+  <div class="{% if topic.is_warning == True %}card border-warning mb-3{% else %}card{% endif %}">
     <div class="card-header font-weight-bold">
       Postado por {{topic.author.get_short_name}}
     </div>
 
 
-    <div class="card-body">
+    <div class="{% if topic.is_warning == True %}card-body text-warning{% else %}card-body{% endif %}">
       <h4 class="card-title">{{topic.title}}</h4>
       <div class="card-text"><p class="lead"> {{ topic.content|linebreaks }} </p></div>
       <div class="row">
 
         {% if topic.is_warning == False %}
-        botoes de post
-        {% else %}
-        botoes de aviso
+          <button type="button" class="btn btn-outline-primary display-2" data-toggle="modal" data-target="#modal{{topic.id}}">Ler Comentários</button>
         {% endif %}
-
-        <button type="button" class="btn btn-outline-primary display-2" data-toggle="modal" data-target="#modal{{topic.id}}">Ler Comentários</button>
 
         {% if topic.author == request.user or user == register.student and register.status == 3  and register.discipline == topic.discipline or topic.discipline.teacher == user %}
         <a class="btn btn-secondary btn-sm" href="{% url 'post:editTopic' topic.id %}" role="button">Editar</a>
