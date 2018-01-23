@@ -20,6 +20,7 @@
         {% render_field form.content class='form-control' rows="20" %}
       </div>
 
+      <input name="author" id='id_author' value='{{ request.user.id }}' hidden/>
 
       {% endwith %}
 

@@ -9,6 +9,8 @@ class Topic(models.Model):
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
     discipline = models.ForeignKey('discipline.Discipline', verbose_name='Disciplina', on_delete=models.DO_NOTHING)
+    is_warning = models.BooleanField('Aviso', default=False)
+    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.DO_NOTHING)
 
 
     class Meta:
@@ -25,6 +27,8 @@ class Reply(models.Model):
     topic = models.ForeignKey('post.Topic', verbose_name='Tópico', on_delete=models.DO_NOTHING)
     created = models.DateTimeField('Criado em', auto_now_add=True)
     modified = models.DateTimeField('Modificado em', auto_now=True)
+    author = models.ForeignKey('accounts.User', verbose_name='Autor', on_delete=models.DO_NOTHING)
+
 
     class Meta:
         verbose_name = 'Comentário'

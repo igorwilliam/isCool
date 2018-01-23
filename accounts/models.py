@@ -25,6 +25,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField('Ativo', default=True)
     date_joined = models.DateTimeField('Data de Entrada', auto_now_add=True)
 
+    is_student = models.BooleanField('Aluno', default=False)
+    is_moderator = models.BooleanField('Moderador', default=False)
+    is_teacher = models.BooleanField('Professor', default=False)
+
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 

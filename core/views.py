@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 from post.models import Topic, Reply
-
+from discipline.models import RegisterStudent, Discipline
 from post.forms import TopicForm, ReplyForm
 
 
@@ -31,6 +31,8 @@ class IndexView(object):
         context = {
             'topics': Topic.objects.all(),
             'replies': Reply.objects.all(),
+            'disciplines': Discipline.objects.all(),
+            'registers': RegisterStudent.objects.all(),
             'formReply': formReply,
             'formTopic': formTopic,
             'sucess': sucess,
@@ -39,3 +41,7 @@ class IndexView(object):
         return render(request, 'index.html', context)
 
 index = IndexView() #criando view em forma de classes
+
+def erro404(request):
+
+    return render(request,'404.html')

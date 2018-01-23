@@ -7,6 +7,9 @@ from discipline.forms import DisciplineForm, RegisterStudentForm
 # Create your views here.
 def addDiscipline(request):
 
+    if request.user.is_teacher == False:
+        return redirect('error')
+
     success = False
     if request.method == 'POST':
         form = DisciplineForm(request.POST)
@@ -24,6 +27,10 @@ def addDiscipline(request):
 class ListDisciplineView(object):
 
     def __call__(self, request):
+
+
+        if request.user.is_student == False:
+            return redirect('error')
 
         if request.method == 'POST':
             form = RegisterStudentForm(request.POST)
@@ -50,6 +57,10 @@ class ManagerDisciplineView(object):
 
     def __call__(self, request):
 
+        if request.user.is_teacher == False:
+            return redirect('error')
+
+
         context = {
             'disciplines': Discipline.objects.all(),
             # 'disciplines': Discipline.objects.get_queryset().filter(id=request.user.id),
@@ -63,6 +74,9 @@ managerDiscipline = ManagerDisciplineView()
 class ListStudentView(object):
 
     def __call__(self, request):
+
+        if request.user.is_teacher == False:
+            return redirect('error')
 
         context = {
             'form': RegisterStudentForm,
@@ -79,6 +93,9 @@ class RegisterStudentView(object):
 
     def __call__(self, request, id):
 
+        if request.user.is_teacher == False:
+            return redirect('error')
+
         student = get_object_or_404(RegisterStudent, id=id)
         form = RegisterStudentForm(data=request.POST, instance=student)
 
@@ -92,6 +109,10 @@ registerStudent = RegisterStudentView()
 class EditDisciplineView(object):
 
     def __call__(self, request, id):
+
+
+        if request.user.is_teacher == False:
+            return redirect('error')
 
         discipline = get_object_or_404(Discipline, id=id)
         if request.method == 'POST':
@@ -112,5 +133,9 @@ class EditDisciplineView(object):
 editDiscipline = EditDisciplineView()
 
 def deleteDiscipline(request, id):
-    discipline = Discipline.objects.get(id=id).delete() 
+
+    if request.user.is_teacher == False:
+        return redirect('error')
+
+    discipline = Discipline.objects.get(id=id).delete()
     return redirect('discipline:managerDiscipline')

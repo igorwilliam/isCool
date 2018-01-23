@@ -40,9 +40,15 @@
         {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
 
           {% render_field form.username class='form-control' placeholder='Nome de Usuário' %}
+          {% render_field form.name class='form-control' placeholder='Nome Completo' %}
           {% render_field form.email class='form-control' placeholder='E-mail' %}
           {% render_field form.password1 class='form-control' placeholder='Senha' %}
           {% render_field form.password2 class='form-control' placeholder='Confirmação da Senha' %}
+
+
+          <input type="hidden" name="is_student" value="1">
+
+
 
         {% endwith %}
 
@@ -58,7 +64,32 @@
 
     <div class="tab-pane fade" id="add_teacher" role="tabpanel" >
 
-      123
+      <form class="form-box" action="" method="post">
+        {% csrf_token %}
+
+
+        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+          {% render_field form.username class='form-control' placeholder='Nome de Usuário' %}
+          {% render_field form.name class='form-control' placeholder='Nome Completo' %}
+          {% render_field form.email class='form-control' placeholder='E-mail' %}
+          {% render_field form.password1 class='form-control' placeholder='Senha' %}
+          {% render_field form.password2 class='form-control' placeholder='Confirmação da Senha' %}
+
+
+          <input type="hidden" name="is_teacher" value="1">
+
+
+
+        {% endwith %}
+
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="{% url 'login' %}" class="btn btn-secondary">Já Tenho Cadastro</a>
+        <hr>
+        <button class="btn btn-warning btn-block">Como funciona o isCool?</button>
+
+      </form>
+
 
     </div>
   </div>

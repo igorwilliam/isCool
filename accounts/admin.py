@@ -24,11 +24,11 @@ class UserAdmin(BaseUserAdmin):
         (
             'Permissões', {
                 'fields': (
-                    'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'
+                    'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions', 'is_student', 'is_moderator', 'is_teacher'
                 )
             }
         ),
     )
-    list_display = ['username', 'name', 'email', 'is_active', 'is_staff', 'date_joined']
+    list_display = ['username', 'name', 'email', 'is_active', 'is_staff', 'date_joined', 'is_student', 'is_moderator', 'is_teacher']
 
 admin.site.register(User, UserAdmin)

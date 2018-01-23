@@ -24,6 +24,8 @@ from discipline import urls as discipline_urls
 
 urlpatterns = [
     path('',views.index, name='index'),
+    path('erro',views.erro404, name='error'),
+
     path('admin/', admin.site.urls),
     path('postar/',include(post_urls)),
     path('conta/',include(accounts_urls)),
