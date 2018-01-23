@@ -20,6 +20,8 @@ class RegisterStudent(models.Model):
         (0, 'Aguardando Confirmação'),
         (1, 'Adicionado na Disciplina'),
         (2, 'Solicitação Recusada'),
+        (3, 'Administrador'),
+
     )
 
     class Meta:

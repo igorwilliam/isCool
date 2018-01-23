@@ -27,8 +27,9 @@
             <td>
 
               {% if register.status == 0 %}  <p class="text-warning"><strong>Solicitação Pendente em{% endif %}
-              {% if register.status == 1 %}  <p class="text-success"><strong>Inscrito em{% endif %}
-              {% if register.status == 2 %}  <p class="text-danger"><strong>Banido em{% endif %}
+              {% if register.status == 1 %}  <p class="text-success"><strong>Aluno de{% endif %}
+              {% if register.status == 2 %}  <p class="text-danger"><strong>Banido de{% endif %}
+              {% if register.status == 3 %}  <p class="text-primary"><strong>Moderador de{% endif %}
                 {{register.discipline}}</strong></p>
 
             </td>
@@ -42,14 +43,16 @@
 
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-primary{% if register.status == 1 %} active{% endif %}">
-                    <input type="radio" name="status" id="id_status" autocomplete="off" value='1'>  Aceitar
+                    <input type="radio" name="status" id="id_status" autocomplete="off" value='1'> Tornar Aluno
                   </label>
                   <label class="btn btn-primary{% if register.status == 2 %} active{% endif %}">
-                    <input type="radio" name="status" id="id_status" autocomplete="off" value='2'>  Recusar
+                    <input type="radio" name="status" id="id_status" autocomplete="off" value='2'>  Banir Aluno
+                  </label>
+
+                  <label class="btn btn-primary{% if register.status == 3 %} active{% endif %}">
+                    <input type="radio" name="status" id="id_status" autocomplete="off" value='3'> Tornar Moderador
                   </label>
                 </div>
-
-                <button type="button" class="btn btn-primary">moderador</button>
 
                 <td style="text-align: center">
                    <input type="submit" name="" value="Mudar Estado" class="btn btn-primary btn-lg">

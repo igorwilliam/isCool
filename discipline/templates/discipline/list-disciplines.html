@@ -22,6 +22,8 @@
           {% if register.discipline.id == discipline.id and register.status == 0 %}<span class="badge badge-pill badge-warning">Solicitação Pendente</span>{% endif %}
           {% if register.discipline.id == discipline.id and register.status == 1 %}<span class="badge badge-pill badge-success">Cadastrado</span>{% endif %}
           {% if register.discipline.id == discipline.id and register.status == 2 %}<span class="badge badge-pill badge-danger">Banido</span>{% endif %}
+          {% if register.discipline.id == discipline.id and register.status == 3 %}<span class="badge badge-pill badge-primary">Moderador</span>{% endif %}
+
           {% endfor %}
 
           <div class="card-header bg-transparent border-info">Mantido por {{discipline.teacher}}</div>
