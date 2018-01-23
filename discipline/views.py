@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from discipline.models import Discipline, RegisterStudent
-
 from discipline.forms import DisciplineForm, RegisterStudentForm
 
 # Create your views here.

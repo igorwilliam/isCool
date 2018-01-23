@@ -13,6 +13,7 @@
           <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#postar_topico" role="tab" aria-controls="home" aria-selected="true">Postar Tópico</a>
           </li>
+
           {% if user.is_teacher == True %}
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#postar_aviso" role="tab" aria-controls="profile" aria-selected="false">Postar Aviso</a>
@@ -83,14 +84,21 @@
                 <select id="id_discipline" name="discipline" class="form-control">
 
                   {% for discipline in disciplines %}
+
+                    {% if discipline.teacher == user  %}
+                      <option value="{{discipline.id }}">{{discipline.name}}</option>
+                    {% endif %}
+
                     {% for register in registers %}
-                      {% if user == register.student and register.status == 1 and register.discipline == discipline%}
+                      {% if user == register.student and register.status == 1 and register.discipline == discipline or user == register.student and register.status == 3 and register.discipline == discipline %}
 
                         <option value="{{discipline.id }}">{{discipline.name}}</option>
 
                         {% endif %}
                       {% endfor %}
                     {% endfor %}
+
+
 
                 </select>
 
