@@ -21,52 +21,55 @@
           <tbody>
         {% endif %}
 
+
         {% for register in registers %}
-            <tr>
-              <td scope="row" > {{register.student}} </td>
+        {% if register.discipline.teacher == user %}
+
+          <tr>
+            <td scope="row" > {{register.student}} </td>
             <td>
 
               {% if register.status == 0 %}  <p class="text-warning"><strong>Solicitação Pendente em{% endif %}
-              {% if register.status == 1 %}  <p class="text-success"><strong>Aluno de{% endif %}
-              {% if register.status == 2 %}  <p class="text-danger"><strong>Banido de{% endif %}
-              {% if register.status == 3 %}  <p class="text-primary"><strong>Moderador de{% endif %}
-                {{register.discipline}}</strong></p>
+                {% if register.status == 1 %}  <p class="text-success"><strong>Aluno de{% endif %}
+                  {% if register.status == 2 %}  <p class="text-danger"><strong>Banido de{% endif %}
+                    {% if register.status == 3 %}  <p class="text-primary"><strong>Moderador de{% endif %}
+                      {{register.discipline}}</strong></p>
 
-            </td>
-            <td style="text-align: center">
-              <form class="" action="{% url 'discipline:registerStudent' register.id %}" method="post">
-                {% csrf_token %}
-                {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                    </td>
+                    <td style="text-align: center">
+                      <form class="" action="{% url 'discipline:registerStudent' register.id %}" method="post">
+                        {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
 
-                <input name="student" id='id_student' value='{{ register.student.id }}' hidden/>
-                <input name="discipline" id='id_discipline' value='{{ register.discipline.id }}' hidden/>
+                        <input name="student" id='id_student' value='{{ register.student.id }}' hidden/>
+                        <input name="discipline" id='id_discipline' value='{{ register.discipline.id }}' hidden/>
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-primary{% if register.status == 1 %} active{% endif %}">
-                    <input type="radio" name="status" id="id_status" autocomplete="off" value='1'> Tornar Aluno
-                  </label>
-                  <label class="btn btn-primary{% if register.status == 2 %} active{% endif %}">
-                    <input type="radio" name="status" id="id_status" autocomplete="off" value='2'>  Banir Aluno
-                  </label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                          <label class="btn btn-primary{% if register.status == 1 %} active{% endif %}">
+                            <input type="radio" name="status" id="id_status" autocomplete="off" value='1'> Tornar Aluno
+                          </label>
+                          <label class="btn btn-primary{% if register.status == 2 %} active{% endif %}">
+                            <input type="radio" name="status" id="id_status" autocomplete="off" value='2'>  Banir Aluno
+                          </label>
 
-                  <label class="btn btn-primary{% if register.status == 3 %} active{% endif %}">
-                    <input type="radio" name="status" id="id_status" autocomplete="off" value='3'> Tornar Moderador
-                  </label>
-                </div>
+                          <label class="btn btn-primary{% if register.status == 3 %} active{% endif %}">
+                            <input type="radio" name="status" id="id_status" autocomplete="off" value='3'> Tornar Moderador
+                          </label>
+                        </div>
 
-                <td style="text-align: center">
-                   <input type="submit" name="" value="Mudar Estado" class="btn btn-primary btn-lg">
-                </td>
-                {% endwith %}
-              </form>
+                        <td style="text-align: center">
+                          <input type="submit" name="" value="Mudar Estado" class="btn btn-primary btn-lg">
+                        </td>
+                        {% endwith %}
+                      </form>
 
-            </td>
-          </tr>
-        {% empty %}
-        <div class="alert alert-warning" role="alert">
-          Nenhum Aluno Cadastrado
-        </div>
+                    </td>
+                  </tr>
+
+
+        {% endif %}
         {% endfor %}
+
 
       </tbody>
     </table>
