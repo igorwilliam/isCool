@@ -37,8 +37,4 @@ urlpatterns = [
     path('entrar/', login, {'template_name': 'accounts/login.html'}, name='login'),
     path('sair/', logout, {'next_page': 'login'}, name='logout'),
 
-]
-
-urlpatterns += static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
