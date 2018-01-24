@@ -47,7 +47,7 @@ def editMaterial(request, id):
 
     material = get_object_or_404(Material, id=id)
     if request.method == 'POST':
-        form = MaterialForm(data=(request.POST, request.FILE), instance=material)
+        form = MaterialForm(request.POST, request.FILES, instance=material)
         if form.is_valid():
             form.save()
             return redirect('material:listMaterial')
@@ -61,3 +61,12 @@ def editMaterial(request, id):
     }
 
     return render(request,'material/add-material.html', context)
+
+def deleteMaterial(request, id):
+
+    if request.user.is_teacher == False:
+        return redirect('error')
+
+    material = Material.objects.get(id=id).delete()
+
+    return redirect('material:listMaterial')
