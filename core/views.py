@@ -21,7 +21,7 @@ from post.forms import TopicForm, ReplyForm
 #         'sucess': sucess,
 #     }
 #     return render(request, 'index.html', context)
-
+@login_required
 def index(request, sucess=False ):
 
     formReply = ReplyForm()

@@ -8,7 +8,11 @@ from post.forms import TopicForm, ReplyForm
 
 from core.views import index
 
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
+@login_required
 def newTopic(request):
 
     form = TopicForm(request.POST or None)
@@ -20,6 +24,7 @@ def newTopic(request):
 
     return redirect('index')
 
+@login_required
 def newReply(request):
 
     form = ReplyForm(request.POST or None)
@@ -80,5 +85,5 @@ def deleteTopic(request, id):
     return redirect('index')
 
 def deleteReply(request, id):
-    reply = Reply.objects.get(id=id).delete() 
+    reply = Reply.objects.get(id=id).delete()
     return redirect('index')
