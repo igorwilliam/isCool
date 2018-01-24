@@ -146,3 +146,151 @@
 {% endfor %}
 
 {% endblock %}
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+
+
+{% block container %}
+
+  <div class="container margin-top">
+
+    <div class="card border-primary">
+      <div class="card-body">
+
+
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#postar_topico" role="tab" aria-controls="home" aria-selected="true">Postar Tópico</a>
+          </li>
+
+          {% if user.is_teacher == True %}
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#postar_aviso" role="tab" aria-controls="profile" aria-selected="false">Postar Aviso</a>
+            </li>
+          {% endif %}
+
+        </ul>
+
+        <div class="tab-content">
+
+          <div class="tab-pane fade show active" id="postar_topico" role="tabpanel" >
+
+            <form class="" action="{% url 'post:newTopic' %}" method="post">
+              {% csrf_token %}
+
+              {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+              <div class="form-group">
+                {% render_field formTopic.title class='form-control' placeholder='Titulo do tópico' %}
+              </div>
+
+              <div class="form-group">
+                <select id="id_discipline" name="discipline" class="form-control">
+
+                  {% for discipline in disciplines %}
+
+                    {% if discipline.teacher == user  %}
+                      <option value="{{discipline.id }}">{{discipline.name}}</option>
+                    {% endif %}
+
+                    {% for register in registers %}
+                      {% if user == register.student and register.status == 1 and register.discipline == discipline or user == register.student and register.status == 3 and register.discipline == discipline %}
+
+                        <option value="{{discipline.id }}">{{discipline.name}}</option>
+
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+
+                </select>
+
+              </div>
+
+              <div class="form-group">
+                {% render_field formTopic.content class='form-control' rows="5" cols="20" placeholder='Conteudo do seu Tópico' %}
+              </div>
+
+                <input name="author" id='id_author' value='{{ request.user.id }}' hidden/>
+              {% endwith %}
+              <button type="submit" class="btn btn-primary">Postar</button>
+
+            </form>
+
+          </div>
+
+          <div class="tab-pane fade" id="postar_aviso" role="tabpanel" aria-labelledby="profile-tab">
+
+            <form class="" action="{% url 'post:newTopic' %}" method="post">
+              {% csrf_token %}
+
+              {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+              <div class="form-group">
+                {% render_field formTopic.title class='form-control' placeholder='Titulo do Aviso' %}
+              </div>
+
+              <div class="form-group">
+                <select id="id_discipline" name="discipline" class="form-control">
+
+                  {% for discipline in disciplines %}
+
+                    {% if discipline.teacher == user  %}
+                      <option value="{{discipline.id }}">{{discipline.name}}</option>
+                    {% endif %}
+
+                    {% for register in registers %}
+                      {% if user == register.student and register.status == 1 and register.discipline == discipline or user == register.student and register.status == 3 and register.discipline == discipline %}
+
+                        <option value="{{discipline.id }}">{{discipline.name}}</option>
+
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+
+
+
+                </select>
+
+              </div>
+
+              <div class="form-group">
+                {% render_field formTopic.content class='form-control' rows="5" cols="20" placeholder='Conteudo do seu Aviso' %}
+              </div>
+
+                <input name="author" id='id_author' value='{{ request.user.id }}' hidden/>
+                <input name="is_warning" id='is_warning' value='True' hidden/>
+
+              {% endwith %}
+              <button type="submit" class="btn btn-warning">Postar</button>
+
+            </form>
+
+
+          </div>
+
+        </div>
+
+
+
+
+        </div>
+      </div>
+  </div>
+
+{% for topic in topics  %}
+    {% if topic.discipline.teacher == user %}
+      {% include "posts.html" %}
+    {% endif %}
+{% endfor %}
+
+
+{% for topic in topics %}
+  {% for register in registers %}
+    {% if user == register.student and register.status == 1  and register.discipline == topic.discipline or user == register.student and register.status == 3 and register.discipline == topic.discipline %}
+      {% include "posts.html" %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}
