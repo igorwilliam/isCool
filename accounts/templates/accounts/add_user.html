@@ -1,12 +1,14 @@
 {% extends "base_accounts.html" %}
 {% load widget_tweaks %}
+{% load static %}
+
 
 {% block title %}Cadastro de Usuário{% endblock %}
 
 {% block container %}
 
 <div class="box">
-  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="{% static "img/logo.png" %}" alt="" width="" height="">
   <p class="display-4">Cadastre-se</p>
 
   {% for error in form.non_field_errors %}

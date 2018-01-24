@@ -1,5 +1,6 @@
 {% extends "base_accounts.html" %}
 {% load widget_tweaks %}
+{% load static %}
 
 {% block title %}Auntenticação de Usuário{% endblock %}
 
@@ -8,7 +9,7 @@
 
     {% csrf_token %}
 
-    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="mb-4" src="{% static "img/logo.png" %}" alt="" width="" height="">
     <p class="display-4">Entre</p>
 
     {% for error in form.non_field_errors %}
