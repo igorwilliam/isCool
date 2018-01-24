@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load thumbnail %}
+
+{% block container %}
+
+<div class="container margin-top">
+
+  <p class="display-4">
+    {% if user.is_teacher %}
+      Gerenciar Materiais
+      {% else %}
+      Materiais Compartilhados
+    {% endif %}
+
+  </p>
+
+{% for material in materials %}
+  {% if material.shared_by == user %}
+    <div class="card border-dark mb-3" >
+      <div class="card-header">
+        <strong>Disciplina de {{material.discipline}}</strong>
+      </div>
+        <div class="card-body text-dark text-center">
+          <h4 class="card-title">{{material.name}}</h4>
+          <p class="card-text">{{material.description}}</p>
+          <a href="{{material.file.url}}" class="btn btn-info" download>Baixar</a>
+          <a href="{% url 'material:editMaterial' material.id %}" class="btn btn-info">Editar</a>
+
+        </div>
+      </div>
+
+  {% endif %}
+{% endfor %}
+
+
+  {% for material in materials  %}
+    {% for register in registers %}
+
+      {% if register.student == user and material.discipline == register.discipline %}
+
+        <div class="card border-dark mb-3" >
+          <div class="card-header">
+
+            <img src="{{material.shared_by.avatar|thumbnail_url:'avatar'}}" alt="" class="rounded-circle">
+            Compartilhado por {{material.shared_by}}</div>
+          <div class="card-body text-dark text-center">
+            <h4 class="card-title">{{material.name}}</h4>
+            <p class="card-text">{{material.description}}</p>
+            <a href="{{material.file.url}}" class="btn btn-info" download>Baixar</a>
+          </div>
+        </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+  {% endfor %}
+
+
+</div>
+
+
+{% endblock %}

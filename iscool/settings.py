@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'post',
     'accounts',
     'discipline',
+    'material',
 ]
 
 MIDDLEWARE = [

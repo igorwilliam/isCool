@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block container %}
+
+<div class="container margin-top">
+  <p class="display-4">
+    {% if edit %}
+        Editar Material
+      {% else %}
+        Cadastro de Material
+    {% endif %}
+  </p>
+
+
+  <form class="form-group" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+
+      <input name="shared_by" id='id_shared_by' value='{{ request.user.id }}' hidden/>
+
+      {% if material %}
+
+        <input type="hidden" id="id_discipline" name="discipline" value="{{material.discipline.id}}">
+
+      {% else %}
+
+        <div class="form-group">
+
+          <select id="id_discipline" name="discipline" class="form-control">
+            {% for discipline in disciplines %}
+            {% if user == discipline.teacher %}
+
+            <option value="{{discipline.id }}">{{discipline.name}}</option>
+
+            {% endif %}
+            {% endfor %}
+          </select>
+
+        </div>
+
+
+      {% endif %}
+
+
+      <div class="form-group">
+        <label for="">Nome do Material</label>
+        {% render_field form.name class='form-control' placeholder='Exemplo: Slides de Matemática' %}
+      </div>
+
+      <div class="form-group">
+        <label for="">Descição do Material</label>
+        {% render_field form.description class='form-control' placeholder='Breve Descição' rows="5" %}
+      </div>
+
+      <div class="form-group">
+        <label for="">Selecione o Material</label>
+        {% render_field form.file class='form-control' %}
+      </div>
+
+
+      {% endwith %}
+
+
+  <button type="submit" class="btn btn-success">
+    {% if edit %}
+        Editar Material
+      {% else %}
+        Cadastrar Material
+    {% endif %}
+  </button>
+  </form>
+</div>
+
+
+{% endblock %}
