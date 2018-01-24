@@ -1,6 +1,6 @@
 venv
 *.pyc
 db.sqlite3
-media
+materials
 .env
 local_settings.py
